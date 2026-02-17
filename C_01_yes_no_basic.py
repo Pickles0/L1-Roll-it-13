@@ -11,6 +11,4 @@ while True:
         print("You said no")
         break
     else:
-        print("Please enter yes/no")
-
-print("we done")
+        print("we done")
