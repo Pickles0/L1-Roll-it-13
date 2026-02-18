@@ -30,14 +30,18 @@ def make_statement(statement, decoration):
 # At the start of the game, the computer / user score are both zero
 comp_score = 0
 user_score = 0
+rounds_played = 0
 
-game_goal = int(input("Game Goal"))       # should be a function call!
+game_goal = int(input("Game Goal: "))       # should be a function call!
 
 # Play multiple rounds until a winner has been found
 while comp_score < game_goal and user_score < game_goal:
 
+    rounds_played += 1
+
     #start of round loop
-    #for testing purposes, ask the user what the points for the user / computer were
+    make_statement(f"round {rounds_played}","🎲")
+
     # Roll the dice for the the the user and note if they got a double
     initial_user = initial_points("User")
     initial_comp = initial_points("Comp")
@@ -107,10 +111,14 @@ while comp_score < game_goal and user_score < game_goal:
     # Work out who won...
     if user_points > comp_points:
         winner = "user"
+        loser = "computer"
+        comp_points = 0
     else:
         winner = "computer"
+        loser = "user"
+        user_points = 0
 
-    round_feedback = f"The {winner} won."
+    round_feedback = f"The {winner} won. The {loser}'s points have been reset to zero"
 
     # double points if eligible
     if winner == "user" and double_user == "yes":
@@ -132,6 +140,9 @@ while comp_score < game_goal and user_score < game_goal:
 
 
 # end of entire game, output final results
+
+make_statement("Game Over", "🏁")
+
 print()
 if user_score > comp_score:
     print("The user won")   # replace this with statement generator call
